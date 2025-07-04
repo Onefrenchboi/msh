@@ -1,4 +1,4 @@
-#include "commands.h"
+#include "filesystem.h"
 
 
 char *commands[] = {
@@ -23,15 +23,6 @@ int ls_a(char* directory) {
   }
   printf("\n");
   free(namelist);
-  
-  /*  DIR* currdir = opendir(directory); //Ca en gros c'est un stream vers notre directory
-  struct dirent *file; //Structure utilisée pour lire le stream
-  while ((file=readdir(currdir)) != NULL){ //bon tu sais lire mec
-    printf("%s",file->d_name); //le -> c'est pour acceder a un attribut de la struct, c'est comme un machin.name
-    printf("\t\t"); //tu sais lire aussi
-  }
-  printf("\n");*/
-
   return EXIT_SUCCESS;
 }
 
@@ -219,13 +210,11 @@ int cp(const char *src, const char *dst) {
     FILE *in = fopen(src, "r");
     if (!in) { 
       perror(src);
-      fclose(in);  
       return 1; 
     }
     FILE *out = fopen(dst, "w");
     if (!out) { 
       perror(dst); 
-      fclose(out); 
       return 1; 
     }
 

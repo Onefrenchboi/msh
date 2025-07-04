@@ -14,7 +14,19 @@
 
 #define PATH_SIZE 2048;
 #define MAX_LINE_SIZE 1024
+#define MAX_COMMAND_SIZE 16
 
+
+
+#define RED(string) "\033[0;31m"string"\033[0m" 
+#define GREEN(string) "\033[0;32m"string"\033[0m"
+#define YELLOW(string) "\033[0;33m"string"\033[0m"
+
+
+
+char *read_line();
+void create_command_from_line(char *line, char *command[]);
+void loop();
 
 
 
