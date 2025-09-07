@@ -2,15 +2,32 @@
 
 
 char *commands[] = {
-  "cd",
+  "cp",
   "help",
   "ls",
   "ls -a",
   "ls -l",
   "cat",
-  "cp",
-  "exit"
+  //"exit"
 };
+
+int (*commands_functions[])() = { cp, help, ls, ls_a, ls_l, cat};
+
+
+int execute_built_in_function(const char *cmd) {
+    for (int i = 0; i < sizeof(commands_functions)/sizeof(commands[0]); i++) {
+        if (strcmp(cmd, commands[i]) == 0) {
+            return commands_functions[i]();
+        }
+    }
+    printf("Unknown command: %s\n", cmd);
+    return -1;
+}
+
+int nb_commands() {
+  return sizeof(commands) / sizeof(char *);
+}
+
 
 
 int ls_a(char* directory) {
@@ -228,5 +245,13 @@ int cp(const char *src, const char *dst) {
     fclose(in);
     fclose(out);
     return 0;
+}
+
+
+int help(){
+  printf(GREEN("This is a simple shell implementation I have created, named \"msh\".\n"));
+  printf(GREEN("Here is a list of built-in commands I recoded you can run :\n"));
+  printf(GREEN("->> ls \n->> cat \n->> cp \n"));
+  return 1;
 }
 

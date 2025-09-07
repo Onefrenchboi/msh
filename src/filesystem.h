@@ -24,18 +24,17 @@
 
 
 
+void loop();
 char *read_line();
 void create_command_from_line(char *line, char *command[]);
-void loop();
+int run(char *command[]);
 
 
+int nb_commands();
+
+int execute_built_in_function(const char *cmd);
 
 
-
-
-int ls(char* directory);
-int ls_a(char* directory);
-int ls_l(char* directory);
 
 
 int is_visible(const struct dirent *file);
@@ -49,5 +48,12 @@ int get_name_from_ino(char* dir, ino_t inode, char* dirname);
 
 
 
+
+
+
+int ls(char* directory);
+int ls_a(char* directory);
+int ls_l(char* directory);
 int cat(const char *filename);
 int cp(const char *src, const char *dst);
+int help();
